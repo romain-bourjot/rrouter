@@ -6,6 +6,11 @@
   "author": "Romain Bourjot <romain.bourjot+npm@gmail.com>",
   "license": "CECILL-C",
   "private": false,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/romain-bourjot/rrouter.git"
