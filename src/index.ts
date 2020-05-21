@@ -27,6 +27,11 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
+
+    if (definition.path.length > 1023) {
+      throw new Error(`Invalid definition, a path is more than 1023 char long: ${definition.path}`);
+    }
+
     const indexer = formatIndexer(definition.method, definition.path);
 
     indexedMap.set(indexer, definition);
@@ -34,6 +39,10 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   return {
     find: (method: string, path: string): Result<Context | null> => {
+      if (path.length > 1023) {
+        return null;
+      }
+
       const indexer = formatIndexer(method, path);
       const found = indexedMap.get(indexer);
 
