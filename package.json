@@ -9,7 +9,8 @@
   "scripts": {
     "test": "ts-node -r tsconfig-paths/register node_modules/tape/bin/tape src/tests/**/*.ts",
     "typecheck": "tsc --noEmit",
-    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "lint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
     "build": "tsc",
     "commit": "git-cz"
   },
@@ -22,6 +23,7 @@
     "@types/tape": "^4.13.0",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "3.2.0",
+    "husky": "^4.2.5",
     "tape": "^5.0.0",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -31,6 +33,12 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn typecheck && yarn lint && yarn test",
+      "pre-push": "yarn typecheck && yarn lint && yarn test"
     }
   }
 }
