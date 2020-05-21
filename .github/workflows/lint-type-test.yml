@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - release/*
+
+jobs:
+  lint-type-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+
+    - name: lint-type-test
+      run: |
+        yarn install
+        yarn lint
+        yarn typecheck
+        yarn test
