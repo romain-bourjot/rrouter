@@ -5,6 +5,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "prefer-for-of": [false],
     "semicolon": [true, "always"],
     "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
   },
