@@ -71,3 +71,7 @@ const getHello = router.find('GET', '/hello');
 const getUnknown = router.find('GET', '/unknown');
 // null
 ```
+
+## Specification
+
+1. This router will not accept a path that is more than 1023 characters long.
