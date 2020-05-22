@@ -22,6 +22,10 @@ function formatIndexer(method: string, path: string): string {
   return `${method}|${path}`;
 }
 
+function isPathLengthValid(path: string): boolean {
+  return path.length < 1024;
+}
+
 function isMethodSupported(method: string): boolean {
   if (method === 'GET') {
     return true;
@@ -52,8 +56,8 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
 
-    if (definition.path.length > 1023) {
-      throw new Error(`Invalid definition, a path is more than 1023 char long: ${definition.method} ${definition.path}`);
+    if (!isPathLengthValid(definition.path)) {
+      throw new Error(`Invalid definition, path is too long: ${definition.method} ${definition.path}`);
     }
 
     if (!isMethodSupported(definition.method)) {
@@ -71,7 +75,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
         return null;
       }
 
-      if (path.length > 1023) {
+      if (!isPathLengthValid(path)) {
         return null;
       }
 
