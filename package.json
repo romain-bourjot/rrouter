@@ -8,6 +8,7 @@
   "private": false,
   "scripts": {
     "test": "ts-node -r tsconfig-paths/register node_modules/tape/bin/tape src/tests/**/*.ts",
+    "test:local": "yarn test | tap-diff",
     "typecheck": "tsc --noEmit",
     "lint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "lint": "tslint -c tslint.json -p tsconfig.json",
@@ -24,6 +25,7 @@
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "3.2.0",
     "husky": "^4.2.5",
+    "tap-diff": "^0.1.1",
     "tape": "^5.0.0",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -37,8 +39,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn typecheck && yarn lint && yarn test",
-      "pre-push": "yarn typecheck && yarn lint && yarn test"
+      "pre-commit": "yarn typecheck && yarn lint && yarn test:local",
+      "pre-push": "yarn typecheck && yarn lint && yarn test:local"
     }
   }
 }
