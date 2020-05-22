@@ -50,11 +50,16 @@ function isMethodSupported(method: string): boolean {
   return false;
 }
 
+function removeTrailingSlash(path: string): string {
+  return (path.length > 1 && path[path.length - 1] === '/') ? path.slice(0, -1) : path;
+}
+
 export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
   const indexedMap = new Map<string, Definition<Context>>();
 
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
+    definition.path = removeTrailingSlash(definition.path);
 
     if (!isPathLengthValid(definition.path)) {
       throw new Error(`Invalid definition, path is too long: ${definition.method} ${definition.path}`);
@@ -70,14 +75,16 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
   }
 
   return {
-    find: (method: string, path: string): Result<Context | null> => {
+    find: (method: string, rawPath: string): Result<Context | null> => {
       if (!isMethodSupported(method)) {
         return null;
       }
 
-      if (!isPathLengthValid(path)) {
+      if (!isPathLengthValid(rawPath)) {
         return null;
       }
+
+      const path = removeTrailingSlash(rawPath);
 
       const indexer = formatIndexer(method, path);
       const found = indexedMap.get(indexer);

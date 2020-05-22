@@ -76,3 +76,4 @@ const getUnknown = router.find('GET', '/unknown');
 
 1. This router will not accept a path that is more than 1023 characters long.
 2. Only GET, PUT, PATCH, POST and DELETE methods are supported.
+3. Trailing slashes are ignored (ie. /foo/bar/ ≡ /foo/bar)
