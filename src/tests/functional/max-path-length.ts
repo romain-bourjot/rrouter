@@ -4,7 +4,7 @@ import { createRouter } from '@src/index';
 
 const getSlashSymbol = Symbol('get_slash');
 
-test('CAT1_functional/simple-usage | GET /(1024 characters)', (t) => {
+test('CAT1_functional/max-path-length | GET /(1024 characters)', (t) => {
   t.plan(1);
 
   const path = '/' + new Array(1023).fill('a').join('');
@@ -26,7 +26,7 @@ test('CAT1_functional/simple-usage | GET /(1024 characters)', (t) => {
   t.deepEqual(actual, expected);
 });
 
-test('CAT1_functional/simple-usage | On creation /(1024 characters)', (t) => {
+test('CAT1_functional/max-path-length | On creation /(1024 characters)', (t) => {
   t.plan(1);
 
   const path = '/' + new Array(1023).fill('a').join('');
@@ -44,7 +44,7 @@ test('CAT1_functional/simple-usage | On creation /(1024 characters)', (t) => {
   t.throws(wrapped);
 });
 
-test('CAT0_functional/simple-usage | GET /(1023 characters)', (t) => {
+test('CAT0_functional/max-path-length | GET /(1023 characters)', (t) => {
   t.plan(1);
 
   const path = '/' + new Array(1022).fill('a').join('');
