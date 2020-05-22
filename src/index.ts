@@ -53,11 +53,11 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
     const definition = definitions[i];
 
     if (definition.path.length > 1023) {
-      throw new Error(`Invalid definition, a path is more than 1023 char long: ${definition.path}`);
+      throw new Error(`Invalid definition, a path is more than 1023 char long: ${definition.method} ${definition.path}`);
     }
 
     if (!isMethodSupported(definition.method)) {
-      throw new Error(`Invalid definition, a path is more than 1023 char long: ${definition.method} ${definition.path}`);
+      throw new Error(`Invalid definition, unsupported method: ${definition.method} ${definition.path}`);
     }
 
     const indexer = formatIndexer(definition.method, definition.path);
