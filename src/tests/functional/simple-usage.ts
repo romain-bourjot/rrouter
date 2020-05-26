@@ -35,7 +35,7 @@ test('CAT0_functional/simple-usage | GET slash', (t) => {
     method: 'GET',
     matchedPath: '/',
     path: '/',
-    params: new Map(),
+    params: {},
     context: getSlashSymbol,
   };
 
@@ -53,7 +53,7 @@ test('CAT0_functional/simple-usage | POST slash', (t) => {
     method: 'POST',
     matchedPath: '/',
     path: '/',
-    params: new Map(),
+    params: {},
     context: postSlashSymbol,
   };
 
@@ -71,7 +71,7 @@ test('CAT0_functional/simple-usage | GET hello', (t) => {
     method: 'GET',
     matchedPath: '/hello',
     path: '/hello',
-    params: new Map(),
+    params: {},
     context: getHelloSymbol,
   };
 

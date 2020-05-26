@@ -14,6 +14,6 @@ export interface Result<Context> {
   method: string;
   matchedPath: string;
   path: string;
-  params: Map<string, string>;
+  params: { [key: string]: string };
   context: Context;
 }

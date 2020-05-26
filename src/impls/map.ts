@@ -31,7 +31,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
           method,
           matchedPath: found.path,
           path,
-          params: new Map(),
+          params: {},
           context: found.context,
         };
       }

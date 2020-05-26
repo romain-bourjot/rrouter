@@ -93,12 +93,12 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
         return null;
       }
 
-      const params = new Map<string, string>();
+      const params = {};
       const paramDefinition = Object.entries(leaf.params);
 
       for (let i = 0; i < paramDefinition.length; i++) {
         const [name, index] = paramDefinition[i];
-        params.set(name, split[index]);
+        params[name] = split[index];
       }
 
       return {

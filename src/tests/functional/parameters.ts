@@ -23,10 +23,10 @@ test('CAT0_functional/parameters | GET /foo/:foo-id/bar/:bar-id', (t) => {
     method: 'GET',
     matchedPath: '/foo/:foo-id/bar/:bar-id',
     path: '/foo/expectedFooId/bar/expectedBarId',
-    params: new Map([
-      ['foo-id', 'expectedFooId'],
-      ['bar-id', 'expectedBarId'],
-    ]),
+    params: {
+      'foo-id': 'expectedFooId',
+      'bar-id': 'expectedBarId',
+    },
     context: symbol,
   };
 
