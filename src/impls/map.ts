@@ -1,6 +1,6 @@
 import { Definition, Router, Result } from '../types';
 
-type Index<Context> = { [key: string]: Definition<Context> };
+type Index<Context> = { [key: string]: Result<Context> };
 type RootIndex<Context> = {
   GET: Index<Context>,
   PUT: Index<Context>,
@@ -20,24 +20,18 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
-    indexedMap[definition.method][definition.path] = definition;
+    indexedMap[definition.method][definition.path] = {
+      method: definition.method,
+      matchedPath: definition.path,
+      path: definition.path,
+      params: {},
+      context: definition.context,
+    };
   }
 
   return {
     find: (method: string, path: string): Result<Context | null> => {
-      const found = indexedMap[method][path];
-
-      if (found) {
-        return {
-          method,
-          matchedPath: found.path,
-          path,
-          params: {},
-          context: found.context,
-        };
-      }
-
-      return null;
+      return indexedMap[method][path] || null;
     },
   };
 }
