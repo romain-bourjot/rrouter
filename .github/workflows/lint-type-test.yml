@@ -3,6 +3,9 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - master
@@ -24,3 +27,4 @@ jobs:
         yarn lint
         yarn typecheck
         yarn test
+        yarn coverage:ci

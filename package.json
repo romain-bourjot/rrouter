@@ -7,7 +7,9 @@
   "license": "CECILL-C",
   "private": false,
   "scripts": {
-    "test": "ts-node -r tsconfig-paths/register node_modules/tape/bin/tape src/tests/**/*.ts",
+    "coverage": "nyc yarn test",
+    "coverage:ci": "yarn coverage && nyc report --reporter=text-lcov | coveralls",
+    "test": "ts-node node_modules/tape/bin/tape src/tests/**/*.ts",
     "test:local": "yarn test | tap-diff",
     "typecheck": "tsc --noEmit",
     "lint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
@@ -20,15 +22,18 @@
     "url": "https://github.com/romain-bourjot/rrouter.git"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/node": "^14.0.4",
     "@types/tape": "^4.13.0",
     "commitizen": "^4.1.2",
+    "coveralls": "^3.1.0",
     "cz-conventional-changelog": "3.2.0",
     "husky": "^4.2.5",
+    "nyc": "^15.0.1",
+    "source-map-support": "^0.5.19",
     "tap-diff": "^0.1.1",
     "tape": "^5.0.0",
     "ts-node": "^8.10.1",
-    "tsconfig-paths": "^3.9.0",
     "tslint": "^6.1.2",
     "typescript": "^3.9.3"
   },

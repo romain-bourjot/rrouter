@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { createRouter } from '@src/index';
+import { createRouter } from '../../index';
 
 const getSlashSymbol = Symbol('get_slash');
 
