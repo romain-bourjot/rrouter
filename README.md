@@ -80,3 +80,37 @@ const getUnknown = router.find('GET', '/unknown');
 4. Paths can be parametrized (ie. /foo/:id/bar will match /foo/2/bar)
 5. The params object in the response MUST NOT be mutated, an error is thrown in that case
 6. Routes are case-sensitive (ie. /Foo/baR ≠ /foo/bar)
+
+## Utilities
+
+### Prefix
+
+Use this utility to prefix all paths of a definition set by the same string.
+It can be useful to group your definitions or version them.
+
+```typescript
+import { createRouter, prefix } from '@rmodules/rrouter';
+
+const userDefinitions = [
+  {
+    method: 'GET',
+    path: '/',
+    context: Symbol('get_user'),
+  },
+  {
+    method: 'POST',
+    path: '/',
+    context: Symbol('post_user'),
+  },
+  {
+    method: 'GET',
+    path: '/:id/message',
+    context: Symbol('get_message'),
+  },
+];
+
+const router = createRouter(prefix('/user', userDefinitions));
+router.find('GET', '/user'); // Found!
+router.find('POST', '/user'); // Found!
+router.find('GET', '/user/anyUserId/message'); // Found!
+```
