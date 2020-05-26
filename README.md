@@ -2,6 +2,9 @@
 
 > Backend router for REST applications written in TypeScript
 
+![CI](https://github.com/romain-bourjot/rrouter/workflows/CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/romain-bourjot/rrouter/badge.svg?branch=refs/pull/17/merge)](https://coveralls.io/github/romain-bourjot/rrouter?branch=refs/pull/17/merge)
+
 ## Installation
 
 ### With yarn

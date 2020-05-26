@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { createRouter } from '@src/index';
+import { createRouter } from '../../index';
 
 test('CAT0_functional/methods | GET on create', (t) => {
   t.plan(1);

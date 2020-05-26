@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { createRouter, prefix } from '@src/index';
+import { createRouter, prefix } from '../../index';
 
 const getUserSymbol = Symbol('get_user');
 const postUserSymbol = Symbol('post_user');
