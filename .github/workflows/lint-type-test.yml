@@ -22,9 +22,11 @@ jobs:
         node-version: '12'
 
     - name: lint-type-test
+      env:
+        COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
+        COVERALLS_GIT_BRANCH: "${{ github.ref }}"
       run: |
         yarn install
         yarn lint
         yarn typecheck
-        yarn test
         yarn coverage:ci
