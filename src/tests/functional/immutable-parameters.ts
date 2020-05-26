@@ -4,7 +4,7 @@ import { createRouter } from '@src/index';
 
 const symbol = Symbol('expected');
 
-test('CAT0_functional/immutable-parameters | Mutate paramaters on static route', (t) => {
+test('CAT0_functional/immutable-parameters | Mutate parameters on static route', (t) => {
   t.plan(1);
 
   const definitions = [
@@ -25,7 +25,7 @@ test('CAT0_functional/immutable-parameters | Mutate paramaters on static route',
   t.throws(wrapped, /object is not extensible/);
 });
 
-test('CAT0_functional/immutable-parameters | Mutate paramaters on dynamic route', (t) => {
+test('CAT0_functional/immutable-parameters | Mutate parameters on dynamic route', (t) => {
   t.plan(1);
 
   const definitions = [
