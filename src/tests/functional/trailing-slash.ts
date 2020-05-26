@@ -21,7 +21,7 @@ test('CAT0_functional/trailing-slash | Trailing slash in request', (t) => {
     method: 'GET',
     matchedPath: '/foo/bar',
     path: '/foo/bar',
-    params: new Map(),
+    params: {},
     context: symbol,
   };
 
@@ -47,7 +47,7 @@ test('CAT0_functional/trailing-slash | Trailing slash in definition', (t) => {
     method: 'GET',
     matchedPath: '/foo/bar',
     path: '/foo/bar',
-    params: new Map(),
+    params: {},
     context: symbol,
   };
 
@@ -73,7 +73,7 @@ test('CAT0_functional/trailing-slash | Root', (t) => {
     method: 'GET',
     matchedPath: '/',
     path: '/',
-    params: new Map(),
+    params: {},
     context: symbol,
   };
 

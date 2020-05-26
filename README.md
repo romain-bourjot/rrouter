@@ -46,7 +46,7 @@ const getSlash = router.find('GET', '/');
 //   method: 'GET',
 //   matchedPath: '/',
 //   path: '/',
-//   params: Map {},
+//   params: {},
 //   context: Symbol('get_slash'),
 // }
 
@@ -55,7 +55,7 @@ const postSlash = router.find('POST', '/');
 //   method: 'POST',
 //   matchedPath: '/',
 //   path: '/',
-//   params: Map {},
+//   params: {},
 //   context: Symbol('post_slash'),
 // }
 
@@ -64,7 +64,7 @@ const getHello = router.find('GET', '/hello');
 //   method: 'GET',
 //   matchedPath: '/hello',
 //   path: '/hello',
-//   params: Map {},
+//   params: {},
 //   context: Symbol('get_hello'),
 // }
 

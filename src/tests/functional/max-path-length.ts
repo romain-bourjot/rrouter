@@ -65,7 +65,7 @@ test('CAT0_functional/max-path-length | GET /(1023 characters)', (t) => {
     method: 'GET',
     matchedPath: path,
     path,
-    params: new Map(),
+    params: {},
     context: getSlashSymbol,
   };
 
