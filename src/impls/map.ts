@@ -1,30 +1,31 @@
 import { Definition, Router, Result } from '../types';
 
-function formatIndexer(method: string, path: string): string {
-  return `${method}|${path}`;
-}
+type Index<Context> = { [key: string]: Definition<Context> };
+type RootIndex<Context> = {
+  GET: Index<Context>,
+  PUT: Index<Context>,
+  POST: Index<Context>,
+  PATCH: Index<Context>,
+  DELETE: Index<Context>,
+};
 
 export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
-  const indexedMap = new Map<string, Definition<Context>>();
-  const lengths = new Set();
+  const indexedMap: RootIndex<Context> = {
+    GET: {},
+    PUT: {},
+    POST: {},
+    PATCH: {},
+    DELETE: {},
+  };
 
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
-    lengths.add(definition.path.length);
-
-    const indexer = formatIndexer(definition.method, definition.path);
-
-    indexedMap.set(indexer, definition);
+    indexedMap[definition.method][definition.path] = definition;
   }
 
   return {
     find: (method: string, path: string): Result<Context | null> => {
-      if (!lengths.has(path.length)) {
-        return null;
-      }
-
-      const indexer = formatIndexer(method, path);
-      const found = indexedMap.get(indexer);
+      const found = indexedMap[method][path];
 
       if (found) {
         return {
