@@ -78,3 +78,4 @@ const getUnknown = router.find('GET', '/unknown');
 2. Only GET, PUT, PATCH, POST and DELETE methods are supported.
 3. Trailing slashes are ignored (ie. /foo/bar/ ≡ /foo/bar)
 4. Paths can be parametrized (ie. /foo/:id/bar will match /foo/2/bar)
+5. The params object in the response MUST NOT be mutated, an error is thrown in that case

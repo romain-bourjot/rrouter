@@ -32,13 +32,13 @@ function createEmptyTree<Context>(): Tree<Context> {
   return root;
 }
 
-function createParams(split: string[], def: [string, number][]): { [key: string]: string } {
+function createParams(split: string[], def: [string, number][]): Readonly<{ [key: string]: string }> {
   const params: { [key: string]: string } = {};
   for (let i = 0; i < def.length; i++) {
     params[def[i][0]] = split[def[i][1]];
   }
 
-  return params;
+  return Object.freeze(params);
 }
 
 function traverse<Context>(
