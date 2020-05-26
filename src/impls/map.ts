@@ -24,7 +24,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
       method: definition.method,
       matchedPath: definition.path,
       path: definition.path,
-      params: {},
+      params: Object.freeze({}),
       context: definition.context,
     };
   }
