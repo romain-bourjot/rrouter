@@ -4,67 +4,86 @@ type Leaf<Context> = {
   name: string,
   path: string,
   context: Context | null,
-  children: { [key: string]: number },
-  params: { [name: string]: number },
+  children: { [key: string]: Leaf<Context> },
+  params: [string, number][],
 };
 
-type Tree<Context> = Leaf<Context>[];
+type Tree<Context> = Leaf<Context>;
 
-const emptyTree = <Context>(): Tree<Context> => [
-  {
-    name: 'root',
+function createEmptyLeaf<Context>(name: string): Tree<Context> {
+  return {
+    name,
     path: '',
     context: null,
-    children: {
-      GET: 1,
-      POST: 2,
-      PUT: 3,
-      PATCH: 4,
-      DELETE: 5,
-    },
-    params: {},
-  },
-  { name: 'GET', context: null, children: {}, path: '', params: {} },
-  { name: 'POST', context: null, children: {}, path: '', params: {} },
-  { name: 'PUT', context: null, children: {}, path: '', params: {} },
-  { name: 'PATCH', context: null, children: {}, path: '', params: {} },
-  { name: 'DELETE', context: null, children: {}, path: '', params: {} },
-];
+    children: {},
+    params: [],
+  };
+}
+
+function createEmptyTree<Context>(): Tree<Context> {
+  const root = createEmptyLeaf<Context>('root');
+
+  root.children.GET = createEmptyLeaf('GET');
+  root.children.POST = createEmptyLeaf('POST');
+  root.children.PUT = createEmptyLeaf('PUT');
+  root.children.PATCH = createEmptyLeaf('PATCH');
+  root.children.DELETE = createEmptyLeaf('DELETE');
+
+  return root;
+}
+
+function createParams(split: string[], def: [string, number][]): { [key: string]: string } {
+  const params: { [key: string]: string } = {};
+  for (let i = 0; i < def.length; i++) {
+    params[def[i][0]] = split[def[i][1]];
+  }
+
+  return params;
+}
+
+function traverse<Context>(
+  tree: Tree<Context>,
+  method: string,
+  split: string[],
+): Leaf<Context> | null {
+  let leaf = tree.children[method];
+
+  for (let i = 1; i < split.length && leaf; i++) {
+    leaf = leaf.children[split[i]] || leaf.children['*'];
+  }
+
+  return leaf;
+}
 
 export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
-  const tree = emptyTree<Context>();
+  const tree = createEmptyTree<Context>();
+  const lengths = new Set<number>();
 
   for (let j = 0; j <  definitions.length; j++) {
     const definition = definitions[j];
 
-    const pathParams = {};
+    const pathParams = [];
     const split = (definition.method + definition.path).split('/');
+    lengths.add(split.length);
 
     for (let i = 0; i < split.length; i++) {
       const partial = split[i];
       if (partial[0] === ':') {
         const paramName = partial.substring(1);
-        pathParams[paramName] = i;
+        pathParams.push([paramName, i]);
         split[i] = '*';
       }
     }
 
-    let leaf = tree[0];
+    let leaf = tree;
     for (let i = 0; i < split.length; i++) {
       const partial = split[i];
 
       if (!leaf.children[partial]) {
-        leaf.children[partial] = tree.length;
-        tree.push({
-          path: '',
-          name: partial,
-          context: null,
-          children: {},
-          params: {},
-        });
+         leaf.children[partial] = createEmptyLeaf(partial);
       }
 
-      leaf = tree[leaf.children[partial]];
+      leaf = leaf.children[partial];
     }
 
     leaf.context = definition.context;
@@ -74,39 +93,23 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   return {
     find: (method: string, path: string): Result<Context> | null => {
-      const split = (method + path).split('/');
-
-      let leaf = tree[0];
-
-      for (let i = 0; i < split.length; i++) {
-        const partial = split[i];
-
-        const nextIndex = leaf.children[partial] || leaf.children['*'];
-        if (!nextIndex) {
-          return null;
-        }
-
-        leaf = tree[nextIndex];
-      }
-
-      if (!leaf.context) {
+      const split = path.split('/');
+      if (!lengths.has(split.length)) {
         return null;
       }
 
-      const params = {};
-      const paramDefinition = Object.entries(leaf.params);
+      const found = traverse(tree, method, split);
 
-      for (let i = 0; i < paramDefinition.length; i++) {
-        const [name, index] = paramDefinition[i];
-        params[name] = split[index];
+      if (!found.context) {
+        return null;
       }
 
       return {
         method,
         path,
-        matchedPath: leaf.path,
-        params,
-        context: leaf.context,
+        matchedPath: found.path,
+        params: createParams(split, found.params),
+        context: found.context,
       };
     },
   };
