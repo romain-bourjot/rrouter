@@ -2,9 +2,10 @@
 
 > Backend router for REST applications written in TypeScript
 
-![CI](https://github.com/romain-bourjot/rrouter/workflows/CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/romain-bourjot/rrouter/badge.svg?branch=refs/pull/17/merge)](https://coveralls.io/github/romain-bourjot/rrouter?branch=refs/pull/17/merge)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4cedec4082ddeb26a969/maintainability)](https://codeclimate.com/github/romain-bourjot/rrouter/maintainability)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/romain-bourjot/rrouter/CI/develop?style=for-the-badge)
+![Coveralls github branch](https://img.shields.io/coveralls/github/romain-bourjot/rrouter/develop?style=for-the-badge)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/romain-bourjot/rrouter?style=for-the-badge)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/romain-bourjot/rrouter?style=for-the-badge)
 
 ## Installation
 
