@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { createRouter } from '../../index';
+import { createRouter } from '../../src/index';
 
 test('CAT0_functional/trailing-slash | Trailing slash in request', (t) => {
   t.plan(1);

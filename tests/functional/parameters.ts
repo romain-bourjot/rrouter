@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import { createRouter } from '../../index';
+import { createRouter } from '../../src/index';
 
 const symbol = Symbol('expected');
 
