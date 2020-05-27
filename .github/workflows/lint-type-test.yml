@@ -21,10 +21,14 @@ jobs:
       with:
         node-version: '12'
 
+    - name: Set output
+      id: vars
+      run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
     - name: lint-type-test
       env:
         COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
-        COVERALLS_GIT_BRANCH: "${{ github.ref }}"
+        COVERALLS_GIT_BRANCH: "${{ steps.vars.outputs.short_ref }}"
       run: |
         yarn install
         yarn lint
