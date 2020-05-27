@@ -4,6 +4,7 @@
 
 ![CI](https://github.com/romain-bourjot/rrouter/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/romain-bourjot/rrouter/badge.svg?branch=refs/pull/17/merge)](https://coveralls.io/github/romain-bourjot/rrouter?branch=refs/pull/17/merge)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4cedec4082ddeb26a969/maintainability)](https://codeclimate.com/github/romain-bourjot/rrouter/maintainability)
 
 ## Installation
 
