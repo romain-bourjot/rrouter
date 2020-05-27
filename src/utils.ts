@@ -3,27 +3,11 @@ export function isPathLengthValid(path: string): boolean {
 }
 
 export function isMethodSupported(method: string): boolean {
-  if (method === 'GET') {
-    return true;
-  }
-
-  if (method === 'POST') {
-    return true;
-  }
-
-  if (method === 'PATCH') {
-    return true;
-  }
-
-  if (method === 'PUT') {
-    return true;
-  }
-
-  if (method === 'DELETE') {
-    return true;
-  }
-
-  return false;
+  return method === 'GET' ||
+    method === 'POST' ||
+    method === 'PATCH' ||
+    method === 'PUT' ||
+    method === 'DELETE';
 }
 
 export function removeTrailingSlash(path: string): string {
