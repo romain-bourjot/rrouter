@@ -20,6 +20,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   for (let i = 0; i < definitions.length; i++) {
     const definition = definitions[i];
+
     indexedMap[definition.method][definition.path] = {
       method: definition.method,
       matchedPath: definition.path,

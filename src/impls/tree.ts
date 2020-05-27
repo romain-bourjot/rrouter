@@ -34,6 +34,7 @@ function createEmptyTree<Context>(): Tree<Context> {
 
 function createParams(split: string[], def: [string, number][]): Readonly<{ [key: string]: string }> {
   const params: { [key: string]: string } = {};
+
   for (let i = 0; i < def.length; i++) {
     params[def[i][0]] = split[def[i][1]];
   }
@@ -55,29 +56,24 @@ function traverse<Context>(
   return leaf;
 }
 
-export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
+function indexTree<Context>(definitions: Definition<Context>[]): Tree<Context> {
   const tree = createEmptyTree<Context>();
-  const lengths = new Set<number>();
 
-  for (let j = 0; j <  definitions.length; j++) {
+  for (let j = 0; j < definitions.length; j++) {
     const definition = definitions[j];
 
     const pathParams = [];
     const split = (definition.method + definition.path).split('/');
-    lengths.add(split.length);
-
-    for (let i = 0; i < split.length; i++) {
-      const partial = split[i];
-      if (partial[0] === ':') {
-        const paramName = partial.substring(1);
-        pathParams.push([paramName, i]);
-        split[i] = '*';
-      }
-    }
 
     let leaf = tree;
     for (let i = 0; i < split.length; i++) {
-      const partial = split[i];
+      let partial = split[i];
+
+      if (partial[0] === ':') {
+        const paramName = partial.substring(1);
+        pathParams.push([paramName, i]);
+        partial = '*';
+      }
 
       if (!leaf.children[partial]) {
          leaf.children[partial] = createEmptyLeaf(partial);
@@ -91,16 +87,19 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
     leaf.params = pathParams;
   }
 
+  return tree;
+}
+
+export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
+  const tree = indexTree<Context>(definitions);
+
   return {
     find: (method: string, path: string): Result<Context> | null => {
       const split = path.split('/');
-      if (!lengths.has(split.length)) {
-        return null;
-      }
 
       const found = traverse(tree, method, split);
 
-      if (!found.context) {
+      if (!found || !found.context) {
         return null;
       }
 

@@ -7,7 +7,7 @@
   "license": "CECILL-C",
   "private": false,
   "scripts": {
-    "coverage": "nyc yarn test",
+    "coverage": "nyc --reporter=html --reporter=text yarn test",
     "coverage:ci": "yarn coverage && nyc report --reporter=text-lcov | coveralls",
     "test": "ts-node node_modules/tape/bin/tape src/tests/**/*.ts",
     "test:local": "yarn test | tap-diff",

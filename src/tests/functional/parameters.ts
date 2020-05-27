@@ -32,3 +32,23 @@ test('CAT0_functional/parameters | GET /foo/:foo-id/bar/:bar-id', (t) => {
 
   t.deepEqual(actual, expected);
 });
+
+test('CAT0_functional/parameters | Unknown route', (t) => {
+  t.plan(1);
+
+  const definitions = [
+    {
+      method: 'GET',
+      path: '/foo/:foo-id/bar/:bar-id',
+      context: symbol,
+    },
+  ];
+
+  const router = createRouter(definitions);
+
+  const actual = router.find('GET', '/foo/expectedFooId/bar/expectedBarId/unknown');
+
+  const expected = null;
+
+  t.deepEqual(actual, expected);
+});
