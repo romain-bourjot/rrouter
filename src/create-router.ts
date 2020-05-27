@@ -46,12 +46,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
       const path = removeTrailingSlash(rawPath);
 
-      const mapFound = mapRouter.find(method, path);
-      if (mapFound) {
-        return mapFound;
-      }
-
-      return treeRouter.find(method, path);
+      return mapRouter.find(method, path) || treeRouter.find(method, path);
     },
   };
 }
