@@ -8,6 +8,18 @@ import {
 import { createRouter as createMapRouter } from './impls/map';
 import { createRouter as createTreeRouter } from './impls/tree';
 
+function validateDefinition(definition: Definition<any>): string | null {
+  if (!isPathLengthValid(definition.path)) {
+    return `Invalid definition, path is too long: ${definition.method} ${definition.path}`;
+  }
+
+  if (!isMethodSupported(definition.method)) {
+    return `Invalid definition, unsupported method: ${definition.method} ${definition.path}`;
+  }
+
+  return null;
+}
+
 export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
   const mapDefinitions: Definition<Context>[] = [];
   const treeDefinitions: Definition<Context>[] = [];
@@ -16,12 +28,9 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
     const definition = definitions[i];
     definition.path = removeTrailingSlash(definition.path);
 
-    if (!isPathLengthValid(definition.path)) {
-      throw new Error(`Invalid definition, path is too long: ${definition.method} ${definition.path}`);
-    }
-
-    if (!isMethodSupported(definition.method)) {
-      throw new Error(`Invalid definition, unsupported method: ${definition.method} ${definition.path}`);
+    const validationError = validateDefinition(definition);
+    if (validationError) {
+      throw new Error(validationError);
     }
 
     if (definition.path.includes('/:')) {
@@ -36,11 +45,7 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
 
   return {
     find: (method: string, rawPath: string): Result<Context | null> => {
-      if (!isMethodSupported(method)) {
-        return null;
-      }
-
-      if (!isPathLengthValid(rawPath)) {
+      if (!isMethodSupported(method) || !isPathLengthValid(rawPath)) {
         return null;
       }
 
