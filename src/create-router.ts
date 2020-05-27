@@ -20,7 +20,9 @@ function validateDefinition(definition: Definition<any>): string | null {
   return null;
 }
 
-export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
+type IndexResult<Context> = { treeRouter: Router<Context>, mapRouter: Router<Context>};
+
+function index<Context>(definitions: Definition<Context>[]): IndexResult<Context> {
   const mapDefinitions: Definition<Context>[] = [];
   const treeDefinitions: Definition<Context>[] = [];
 
@@ -40,8 +42,14 @@ export function createRouter<Context>(definitions: Definition<Context>[]): Route
     }
   }
 
-  const mapRouter = createMapRouter(mapDefinitions);
-  const treeRouter = createTreeRouter(treeDefinitions);
+  return {
+    mapRouter: createMapRouter(mapDefinitions),
+    treeRouter: createTreeRouter(treeDefinitions),
+  };
+}
+
+export function createRouter<Context>(definitions: Definition<Context>[]): Router<Context> {
+  const { mapRouter, treeRouter } = index(definitions);
 
   return {
     find: (method: string, rawPath: string): Result<Context | null> => {
