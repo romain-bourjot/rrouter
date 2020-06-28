@@ -6,6 +6,8 @@
 ![Coveralls github branch](https://img.shields.io/coveralls/github/romain-bourjot/rrouter/develop?style=for-the-badge)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/romain-bourjot/rrouter?style=for-the-badge)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/romain-bourjot/rrouter?style=for-the-badge)
+![David](https://img.shields.io/david/romain-bourjot/rrouter?style=for-the-badge)
+![David](https://img.shields.io/david/dev/romain-bourjot/rrouter?style=for-the-badge)
 
 ## Installation
 
