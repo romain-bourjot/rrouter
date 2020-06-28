@@ -2,12 +2,12 @@
 
 > Backend router for REST applications written in TypeScript
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/romain-bourjot/rrouter/CI/develop?style=for-the-badge)
-![Coveralls github branch](https://img.shields.io/coveralls/github/romain-bourjot/rrouter/develop?style=for-the-badge)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/romain-bourjot/rrouter?style=for-the-badge)
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/romain-bourjot/rrouter?style=for-the-badge)
-![David](https://img.shields.io/david/romain-bourjot/rrouter?style=for-the-badge)
-![David](https://img.shields.io/david/dev/romain-bourjot/rrouter?style=for-the-badge)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/romain-bourjot/rrouter/CI/develop?style=for-the-badge)](https://github.com/romain-bourjot/rrouter/actions?query=workflow%3ACI)
+[![Coveralls github branch](https://img.shields.io/coveralls/github/romain-bourjot/rrouter/develop?style=for-the-badge)](https://coveralls.io/github/romain-bourjot/rrouter)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/romain-bourjot/rrouter?style=for-the-badge)](https://codeclimate.com/github/romain-bourjot/rrouter)
+[![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/romain-bourjot/rrouter?style=for-the-badge)](https://snyk.io/test/github/romain-bourjot/rrouter)
+[![David](https://img.shields.io/david/romain-bourjot/rrouter?style=for-the-badge)](https://david-dm.org/romain-bourjot/rrouter)
+[![David](https://img.shields.io/david/dev/romain-bourjot/rrouter?style=for-the-badge)](https://david-dm.org/romain-bourjot/rrouter?type=dev)
 
 ## Installation
 
