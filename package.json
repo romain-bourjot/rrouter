@@ -25,7 +25,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/node": "^14.6.2",
     "@types/tape": "^4.13.0",
-    "commitizen": "^4.2.1",
+    "commitizen": "^4.2.2",
     "coveralls": "^3.1.0",
     "cz-conventional-changelog": "3.3.0",
     "husky": "^4.3.0",
